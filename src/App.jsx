@@ -28,7 +28,10 @@ function App() {
           />
         </ol>
         {/* pass handleSelectSquare as a prop to GameBoard because that’s where the square selection occurs */}
-        <GameBoard onSelectSquare={handleSelectSquare} />
+        <GameBoard
+          onSelectSquare={handleSelectSquare}
+          activePlayerSymbol={activePlayer}
+        />
       </div>
       LOG
     </main>

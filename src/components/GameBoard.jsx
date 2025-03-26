@@ -5,7 +5,7 @@ const initialGameBoard = [
   [null, null, null],
   [null, null, null],
 ];
-export default function GameBoard({ onSelectSquare }) {
+export default function GameBoard({ onSelectSquare, activePlayerSymbol }) {
   const [gameBoard, setGameBoard] = useState(initialGameBoard);
   function handleSelectSquare(rowIndex, colIndex) {
     // update the gameBoard state based on the previous state of that gameBoard
@@ -15,7 +15,7 @@ export default function GameBoard({ onSelectSquare }) {
       const updatedBoard = [
         ...prevGameBoard.map((innerArray) => [...innerArray]),
       ];
-      updatedBoard[rowIndex][colIndex] = "X"; // mark the selected square as "X"
+      updatedBoard[rowIndex][colIndex] = activePlayerSymbol; // mark the selected square with the current player's symbol
       return updatedBoard;
     });
     // call onSelectSquare function from inside of handleSelectSquare function because this function is triggered if a square was selected by clicking the button
