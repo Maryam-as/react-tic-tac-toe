@@ -1,5 +1,5 @@
 import { useState } from "react";
-export default function Player({ initialName, symbol }) {
+export default function Player({ initialName, symbol, isActive }) {
   // initialize state for the player's name and provide a function to update it
   const [playerName, setPlayerName] = useState(initialName);
   // track whether the player is in edit mode (true if editing, false otherwise)
@@ -23,7 +23,8 @@ export default function Player({ initialName, symbol }) {
     );
   }
   return (
-    <li>
+    // dynamically assign the "active" class to the list item based on isActive prop
+    <li className={isActive ? "active" : undefined}>
       <span className="player">
         {editablePlayerName}
         <span className="player-symbol">{symbol}</span>

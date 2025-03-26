@@ -4,7 +4,7 @@ import Player from "./components/Player.jsx";
 
 function App() {
   // manage the activePlayer state in App component which has access to both Player & GameBoard components that need to work with this state
-  const [activePlayer, setActivePlayer] = useState("x");
+  const [activePlayer, setActivePlayer] = useState("X");
   // Define a function to switch turns after a square is selected on the game board
   function handleSelectSquare() {
     // Update the state to toggle between 'X' and 'O' for the next player's turn
@@ -15,9 +15,17 @@ function App() {
   return (
     <main>
       <div id="game-container">
-        <ol id="players">
-          <Player initialName="Player 1" symbol="X" />
-          <Player initialName="Player 2" symbol="O" />
+        <ol id="players" className="highlight-player">
+          <Player
+            initialName="Player 1"
+            symbol="X"
+            isActive={activePlayer === "X"}
+          />
+          <Player
+            initialName="Player 2"
+            symbol="O"
+            isActive={activePlayer === "O"}
+          />
         </ol>
         {/* pass handleSelectSquare as a prop to GameBoard because that’s where the square selection occurs */}
         <GameBoard onSelectSquare={handleSelectSquare} />
