@@ -4,6 +4,8 @@ import Player from "./components/Player.jsx";
 import Log from "./components/Log.jsx";
 
 function App() {
+  // manage the array of turns taken during the game
+  const [gameTurns, setGameTurns] = useState([]);
   // manage the activePlayer state in App component which has access to both Player & GameBoard components that need to work with this state
   const [activePlayer, setActivePlayer] = useState("X");
   // Define a function to switch turns after a square is selected on the game board
@@ -12,6 +14,7 @@ function App() {
     setActivePlayer((currentActivePlayer) =>
       currentActivePlayer === "X" ? "O" : "X"
     );
+    setGameTurns();
   }
   return (
     <main>
