@@ -20,7 +20,7 @@ function App() {
       let currentPlayer = "X";
       // Check if the first item(latest turn) in prevTurns array has player "X".
       // check if there is a latest turn stored (it's not an empty array)
-      if (prevTurns.lenght > 0 && prevTurns[0].player === "X") {
+      if (prevTurns.length > 0 && prevTurns[0].player === "X") {
         currentPlayer = "O";
       }
       // create a deep copy of the old state to update the gameTurns state array in an immutable way
@@ -48,10 +48,7 @@ function App() {
           />
         </ol>
         {/* pass handleSelectSquare as a prop to GameBoard because that’s where the square selection occurs */}
-        <GameBoard
-          onSelectSquare={handleSelectSquare}
-          activePlayerSymbol={activePlayer}
-        />
+        <GameBoard onSelectSquare={handleSelectSquare} turns={gameTurns} />
       </div>
       <Log />
     </main>
