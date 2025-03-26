@@ -50,7 +50,7 @@ function App() {
         {/* pass handleSelectSquare as a prop to GameBoard because that’s where the square selection occurs */}
         <GameBoard onSelectSquare={handleSelectSquare} turns={gameTurns} />
       </div>
-      <Log />
+      <Log turns={gameTurns} />
     </main>
   );
 }
