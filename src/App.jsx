@@ -6,14 +6,13 @@ import Log from "./components/Log.jsx";
 function App() {
   // manage the array of turns taken during the game
   const [gameTurns, setGameTurns] = useState([]);
-  // manage the activePlayer state in App component which has access to both Player & GameBoard components that need to work with this state
-  const [activePlayer, setActivePlayer] = useState("X");
+  // derive the currently active player from the gameTurns state
+  let currentPlayer = "X";
+  if (gameTurns.length > 0 && gameTurns[0].player === "X") {
+    currentPlayer = "O";
+  }
   // Define a function to switch turns after a square is selected on the game board
   function handleSelectSquare(rowIndex, colIndex) {
-    // Update the state to toggle between 'X' and 'O' for the next player's turn
-    setActivePlayer((currentActivePlayer) =>
-      currentActivePlayer === "X" ? "O" : "X"
-    );
     // update the gameTurns based on the previous state of the gameTurns
     setGameTurns((prevTurns) => {
       // determine the symbol of the currently active player based on the latest turn
