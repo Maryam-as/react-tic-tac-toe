@@ -1,6 +1,7 @@
 import { useState } from "react";
 import GameBoard from "./components/GameBoard.jsx";
 import Player from "./components/Player.jsx";
+import Log from "./components/Log.jsx";
 
 function App() {
   // manage the activePlayer state in App component which has access to both Player & GameBoard components that need to work with this state
@@ -33,7 +34,7 @@ function App() {
           activePlayerSymbol={activePlayer}
         />
       </div>
-      LOG
+      <Log />
     </main>
   );
 }
