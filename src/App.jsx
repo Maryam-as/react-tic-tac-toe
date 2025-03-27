@@ -5,6 +5,12 @@ import Player from "./components/Player.jsx";
 import Log from "./components/Log.jsx";
 import { WINNING_COMBINATIONS } from "./winning-combinations.js";
 
+// define the structure for a 3x3 grid game board
+const initialGameBoard = [
+  [null, null, null],
+  [null, null, null],
+  [null, null, null],
+];
 function deriveActivePlayer(gameTurns) {
   let currentPlayer = "X";
   if (gameTurns.length > 0 && gameTurns[0].player === "X") {
@@ -12,12 +18,21 @@ function deriveActivePlayer(gameTurns) {
   }
   return currentPlayer;
 }
-
 function App() {
   // manage the array of turns taken during the game
   const [gameTurns, setGameTurns] = useState([]);
   const activePlayer = deriveActivePlayer(gameTurns);
-  // Define a function to switch turns after a square is selected on the game board
+
+  // derive the gameBoard from the gameTurns state
+  let gameBoard = initialGameBoard;
+  // overwrite the gameBoard with the data from gameTurns array if there are any turns
+  // if gameTurns is an empty array, the loop simply won't execute
+  for (const turn of gameTurns) {
+    const { square, player } = turn; // destructure turn to get square and player
+    const { row, col } = square;
+    gameBoard[row][col] = player; // mark the selected square with the player's symbol
+  }
+
   // add win condition
   for (const combination of WINNING_COMBINATIONS) {
     const firstSquareSymbol = "";
@@ -53,7 +68,7 @@ function App() {
           />
         </ol>
         {/* pass handleSelectSquare as a prop to GameBoard because that’s where the square selection occurs */}
-        <GameBoard onSelectSquare={handleSelectSquare} turns={gameTurns} />
+        <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
       </div>
       <Log turns={gameTurns} />
     </main>
