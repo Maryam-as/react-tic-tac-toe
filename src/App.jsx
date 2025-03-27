@@ -1,7 +1,9 @@
 import { useState } from "react";
+
 import GameBoard from "./components/GameBoard.jsx";
 import Player from "./components/Player.jsx";
 import Log from "./components/Log.jsx";
+import { WINNING_COMBINATIONS } from "./winning-combinations.js";
 
 function deriveActivePlayer(gameTurns) {
   let currentPlayer = "X";
@@ -16,6 +18,12 @@ function App() {
   const [gameTurns, setGameTurns] = useState([]);
   const activePlayer = deriveActivePlayer(gameTurns);
   // Define a function to switch turns after a square is selected on the game board
+  // add win condition
+  for (const combination of WINNING_COMBINATIONS) {
+    const firstSquareSymbol = "";
+    const secondSquareSymbol = "";
+    const thirdSqaureSymbol = "";
+  }
   function handleSelectSquare(rowIndex, colIndex) {
     // update the gameTurns based on the previous state of the gameTurns
     setGameTurns((prevTurns) => {
