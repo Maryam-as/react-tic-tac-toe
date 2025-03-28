@@ -32,12 +32,24 @@ function App() {
     const { row, col } = square;
     gameBoard[row][col] = player; // mark the selected square with the player's symbol
   }
-
-  // add win condition
+  let winner;
+  // iterate over all winning combinations to check if there's a winner
   for (const combination of WINNING_COMBINATIONS) {
-    const firstSquareSymbol = "";
-    const secondSquareSymbol = "";
-    const thirdSqaureSymbol = "";
+    // get the symbols from the gameBoard for each square in the current winning combination
+    const firstSquareSymbol =
+      gameBoard[combination[0].row][combination[0].column];
+    const secondSquareSymbol =
+      gameBoard[combination[1].row][combination[1].column];
+    const thirdSqaureSymbol =
+      gameBoard[combination[2].row][combination[2].column];
+    // check if the first square is not empty and all three symbols are the same
+    if (
+      firstSquareSymbol &&
+      firstSquareSymbol === secondSquareSymbol &&
+      firstSquareSymbol === thirdSqaureSymbol
+    ) {
+      winner = firstSquareSymbol;
+    }
   }
   function handleSelectSquare(rowIndex, colIndex) {
     // update the gameTurns based on the previous state of the gameTurns
@@ -67,6 +79,8 @@ function App() {
             isActive={activePlayer === "O"}
           />
         </ol>
+        {/* conditionally render a "You win" message if a winner exists */}
+        {winner && <p>You win, {winner}!</p>}
         {/* pass handleSelectSquare as a prop to GameBoard because that’s where the square selection occurs */}
         <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
       </div>
