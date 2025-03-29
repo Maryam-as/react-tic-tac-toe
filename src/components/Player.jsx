@@ -1,5 +1,10 @@
 import { useState } from "react";
-export default function Player({ initialName, symbol, isActive }) {
+export default function Player({
+  initialName,
+  symbol,
+  isActive,
+  onChangeName,
+}) {
   // initialize state for the player's name and provide a function to update it
   const [playerName, setPlayerName] = useState(initialName);
   // track whether the player is in edit mode (true if editing, false otherwise)
@@ -7,6 +12,10 @@ export default function Player({ initialName, symbol, isActive }) {
   function handleEditClick() {
     // update the new state based on the previous state value
     setIsEditing((editing) => !editing);
+    // if switching to "not editing" mode, update the player name using the onChangeName function
+    if (isEditing) {
+      onChangeName(symbol, playerName);
+    }
   }
   // update playerName state with the value from the input field
   function handleChange(event) {
