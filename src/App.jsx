@@ -19,7 +19,19 @@ function deriveActivePlayer(gameTurns) {
   }
   return currentPlayer;
 }
-
+function deriveGameBoard(gameTurns) {
+  // derive the gameBoard from the gameTurns state
+  // avoid overriding the initialGameBoard array in memory by creating a deep copy
+  let gameBoard = [...initialGameBoard.map((nestedArray) => [...nestedArray])];
+  // overwrite the gameBoard with the data from gameTurns array if there are any turns
+  // if gameTurns is an empty array, the loop simply won't execute
+  for (const turn of gameTurns) {
+    const { square, player } = turn; // destructure turn to get square and player
+    const { row, col } = square;
+    gameBoard[row][col] = player; // mark the selected square with the player's symbol
+  }
+  return gameBoard;
+}
 function deriveWinner(gameBoard, players) {
   let winner;
   // iterate over all winning combinations to check if there's a winner
@@ -49,18 +61,7 @@ function App() {
   // manage the array of turns taken during the game
   const [gameTurns, setGameTurns] = useState([]);
   const activePlayer = deriveActivePlayer(gameTurns);
-
-  // derive the gameBoard from the gameTurns state
-  // avoid overriding the initialGameBoard array in memory by creating a deep copy
-  let gameBoard = [...initialGameBoard.map((nestedArray) => [...nestedArray])];
-  // overwrite the gameBoard with the data from gameTurns array if there are any turns
-  // if gameTurns is an empty array, the loop simply won't execute
-  for (const turn of gameTurns) {
-    const { square, player } = turn; // destructure turn to get square and player
-    const { row, col } = square;
-    gameBoard[row][col] = player; // mark the selected square with the player's symbol
-  }
-
+  const gameBoard = deriveGameBoard(gameTurns);
   const winner = deriveWinner(gameBoard, players);
   // check if the game is a draw (9 turns played and no winner)
   const hasDraw = gameTurns.length === 9 && !winner;
