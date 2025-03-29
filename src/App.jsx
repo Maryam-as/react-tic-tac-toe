@@ -51,6 +51,9 @@ function App() {
       winner = firstSquareSymbol;
     }
   }
+  // check if the game is a draw (9 turns played and no winner)
+  const hasDraw = gameTurns.length === 9 && !winner;
+
   function handleSelectSquare(rowIndex, colIndex) {
     // update the gameTurns based on the previous state of the gameTurns
     setGameTurns((prevTurns) => {
