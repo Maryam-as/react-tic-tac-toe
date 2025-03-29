@@ -52,7 +52,8 @@ function App() {
       firstSquareSymbol === secondSquareSymbol &&
       firstSquareSymbol === thirdSqaureSymbol
     ) {
-      winner = firstSquareSymbol;
+      // derive the winner's name from the players state using the symbol of the first square
+      winner = players[firstSquareSymbol];
     }
   }
   // check if the game is a draw (9 turns played and no winner)
