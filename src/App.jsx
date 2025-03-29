@@ -25,7 +25,8 @@ function App() {
   const activePlayer = deriveActivePlayer(gameTurns);
 
   // derive the gameBoard from the gameTurns state
-  let gameBoard = initialGameBoard;
+  // avoid overriding the initialGameBoard array in memory by creating a deep copy
+  let gameBoard = [...initialGameBoard.map((nestedArray) => [...nestedArray])];
   // overwrite the gameBoard with the data from gameTurns array if there are any turns
   // if gameTurns is an empty array, the loop simply won't execute
   for (const turn of gameTurns) {
