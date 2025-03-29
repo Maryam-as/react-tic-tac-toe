@@ -83,8 +83,8 @@ function App() {
             isActive={activePlayer === "O"}
           />
         </ol>
-        {/* conditionally render a game over message if a winner exists */}
-        {winner && <GameOver winner={winner} />}
+        {/* conditionally render a game over message if there is a winner or a draw */}
+        {(winner || hasDraw) && <GameOver winner={winner} />}
         {/* pass handleSelectSquare as a prop to GameBoard because that’s where the square selection occurs */}
         <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
       </div>
