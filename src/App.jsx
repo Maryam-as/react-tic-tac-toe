@@ -75,6 +75,18 @@ function App() {
   function handleRestart() {
     setGameTurns([]);
   }
+  // function to handle changes in player names
+  function handlePlayerNameChange(symbol, newName) {
+    // update the players state based on the previous state value
+    setPlayers((prevPlayers) => {
+      return {
+        // spread the previous players state to keep other player data intact
+        ...prevPlayers,
+        // update the player name for the given symbol (X or O)
+        [symbol]: newName,
+      };
+    });
+  }
 
   return (
     <main>
