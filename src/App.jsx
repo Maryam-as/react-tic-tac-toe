@@ -20,6 +20,8 @@ function deriveActivePlayer(gameTurns) {
   return currentPlayer;
 }
 function App() {
+  // initialize state to store player names, with "Player 1" as X and "Player 2" as O
+  const [players, setPlayers] = useState({ X: "Player 1", O: "Player 2" });
   // manage the array of turns taken during the game
   const [gameTurns, setGameTurns] = useState([]);
   const activePlayer = deriveActivePlayer(gameTurns);
