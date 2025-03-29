@@ -6,8 +6,13 @@ import Log from "./components/Log.jsx";
 import { WINNING_COMBINATIONS } from "./winning-combinations.js";
 import GameOver from "./components/GameOver.jsx";
 
+const PLAYERS = {
+  X: "Player 1",
+  O: "Player 2",
+};
+
 // define the structure for a 3x3 grid game board
-const initialGameBoard = [
+const INITIAL_GAME_BOARD = [
   [null, null, null],
   [null, null, null],
   [null, null, null],
@@ -22,7 +27,9 @@ function deriveActivePlayer(gameTurns) {
 function deriveGameBoard(gameTurns) {
   // derive the gameBoard from the gameTurns state
   // avoid overriding the initialGameBoard array in memory by creating a deep copy
-  let gameBoard = [...initialGameBoard.map((nestedArray) => [...nestedArray])];
+  let gameBoard = [
+    ...INITIAL_GAME_BOARD.map((nestedArray) => [...nestedArray]),
+  ];
   // overwrite the gameBoard with the data from gameTurns array if there are any turns
   // if gameTurns is an empty array, the loop simply won't execute
   for (const turn of gameTurns) {
@@ -56,8 +63,8 @@ function deriveWinner(gameBoard, players) {
   return winner;
 }
 function App() {
-  // initialize state to store player names, with "Player 1" as X and "Player 2" as O
-  const [players, setPlayers] = useState({ X: "Player 1", O: "Player 2" });
+  // initialize state to store player names
+  const [players, setPlayers] = useState(PLAYERS);
   // manage the array of turns taken during the game
   const [gameTurns, setGameTurns] = useState([]);
   const activePlayer = deriveActivePlayer(gameTurns);
@@ -101,13 +108,13 @@ function App() {
       <div id="game-container">
         <ol id="players" className="highlight-player">
           <Player
-            initialName="Player 1"
+            initialName={PLAYERS.X}
             symbol="X"
             isActive={activePlayer === "X"}
             onChangeName={handlePlayerNameChange}
           />
           <Player
-            initialName="Player 2"
+            initialName={PLAYERS.O}
             symbol="O"
             isActive={activePlayer === "O"}
             onChangeName={handlePlayerNameChange}
