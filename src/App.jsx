@@ -68,6 +68,11 @@ function App() {
       return updatedTurns;
     });
   }
+  // define a function to reset the game state by clearing the game turns
+  function handleRestart() {
+    setGameTurns([]);
+  }
+
   return (
     <main>
       <div id="game-container">
@@ -84,7 +89,9 @@ function App() {
           />
         </ol>
         {/* conditionally render a game over message if there is a winner or a draw */}
-        {(winner || hasDraw) && <GameOver winner={winner} />}
+        {(winner || hasDraw) && (
+          <GameOver winner={winner} onRestart={handleRestart} />
+        )}
         {/* pass handleSelectSquare as a prop to GameBoard because that’s where the square selection occurs */}
         <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
       </div>
