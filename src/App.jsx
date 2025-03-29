@@ -4,6 +4,7 @@ import GameBoard from "./components/GameBoard.jsx";
 import Player from "./components/Player.jsx";
 import Log from "./components/Log.jsx";
 import { WINNING_COMBINATIONS } from "./winning-combinations.js";
+import GameOver from "./components/GameOver.jsx";
 
 // define the structure for a 3x3 grid game board
 const initialGameBoard = [
@@ -82,8 +83,8 @@ function App() {
             isActive={activePlayer === "O"}
           />
         </ol>
-        {/* conditionally render a "You win" message if a winner exists */}
-        {winner && <p>You win, {winner}!</p>}
+        {/* conditionally render a game over message if a winner exists */}
+        {winner && <GameOver winner={winner} />}
         {/* pass handleSelectSquare as a prop to GameBoard because that’s where the square selection occurs */}
         <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
       </div>
